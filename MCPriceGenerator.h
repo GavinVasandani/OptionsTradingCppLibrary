@@ -21,7 +21,7 @@ class MCPriceGenerator {
     public:
 
     //Constructor with default values
-    MCPriceGenerator(double dt_ = 5, double initOptionPrice_ = 100, int numTimeSteps_ = 10, double rfRate_ = 1, double volatility_ = 0.5) {
+    MCPriceGenerator(double dt_ = 5.0, double initOptionPrice_ = 100.0, int numTimeSteps_ = 10, double rfRate_ = 1.0, double volatility_ = 0.5) {
         dt = dt_;
         initOptionPrice = initOptionPrice_;
         numofTimeSteps = numofTimeSteps_;
