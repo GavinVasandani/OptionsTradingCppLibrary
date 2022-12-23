@@ -1,3 +1,4 @@
+/*
 #include "MCPriceGenerator.h"
 #include <vector>
 #include <random>
@@ -6,7 +7,15 @@ using namespace std;
 
 //Code with member function initialization for MCPriceGenerator class
 
-vector<double> MCPriceGenerator::operator() (int seed) {
+MCPriceGenerator::MCPriceGenerator(double dt_ = 5.0, double initOptionPrice_ = 100.0, int numTimeSteps_ = 10, double rfRate_ = 1.0, double volatility_ = 0.5) {
+    dt = dt_;
+    initOptionPrice = initOptionPrice_;
+    numTimeSteps = numTimeSteps_;
+    rfRate = rfRate_;
+    volatility = volatility_;
+}
+
+vector<double> MCPriceGenerator::operator()(int seed) {
 
     vector<double> optionPrices;
     mt19937_64 engineGenerateVal (seed); //an engine to generate values, numbers generated are dependent on seed
@@ -39,3 +48,4 @@ vector<double> MCPriceGenerator::operator() (int seed) {
     return optionPrices;
 
 }
+*/
