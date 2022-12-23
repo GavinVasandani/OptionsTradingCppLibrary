@@ -23,7 +23,14 @@ class MCPriceGenerator {
     public:
 
     //Constructor with default values
-    MCPriceGenerator(int dt_, int initOptionPrice_, int numTimeSteps_, int rfRate_, int volatility_);
+    //Cannot initialize constructor with default arguments outside class even with using class namespace for some reason
+    MCPriceGenerator(int dt_ = 5, int initOptionPrice_ = 100, int numTimeSteps_ = 2, int rfRate_ = 1, int volatility_ = 1) :
+    dt(dt_), 
+    initOptionPrice(initOptionPrice_),
+    numTimeSteps(numTimeSteps_),
+    rfRate(rfRate_),
+    volatility(volatility_)
+    {}
 
     //operator overloading of (), output is vector of option price throughout time steps, and price is type double so vector element type is double
     //input seed is needed to generate values from engine
@@ -31,13 +38,7 @@ class MCPriceGenerator {
 
 };
 
-MCPriceGenerator::MCPriceGenerator(int dt_ = 5, int initOptionPrice_ = 100, int numTimeSteps_ = 10, int rfRate_ = 1, int volatility_ = 0.5) {
-    dt = dt_;
-    initOptionPrice = initOptionPrice_;
-    numTimeSteps = numTimeSteps_;
-    rfRate = rfRate_;
-    volatility = volatility_;
-}
+
 
 vector<int> MCPriceGenerator::operator()(int seed) {
 
@@ -52,7 +53,7 @@ vector<int> MCPriceGenerator::operator()(int seed) {
     //output type of currPrice func is auto which is inferred from func return type which is double
     //so in algorithms that use predicate, in algo implementation, name is assigned to lambda func its just that
     //lambda func is written as input parameter and its type is return type which is same type as lambda func name
-    auto currPrice = [] (int prevPrice, int randomVal) {
+    auto currPrice = [this] (int prevPrice, int randomVal) {
         int expArg = (rfRate-((volatility^2)/2.0))*dt + (volatility*randomVal*sqrt(dt));
         auto price = prevPrice*exp(expArg);
         return price;
