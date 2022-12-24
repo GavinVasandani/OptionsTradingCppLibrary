@@ -1,34 +1,12 @@
-#ifndef MC_PRICE_GENERATOR_H
-#define MC_PRICE_GENERATOR_H
-
 #include <vector>
-//#include <cmath>
-//#include <random>
+#include <cmath>
+#include <random>
 
 using namespace std;
 
-//Header file containing only class name and declaring class member var and funcs.
+//Cannot have main in this file so initialize member func in class MCPriceGenerator namespace:
 
-class MCPriceGenerator {
-
-    private:
-
-    //double used for decimal points in terms 0.0
-    int dt; //duration of each time interval
-    int initOptionPrice; //initial option price from when evaluating
-    int numTimeSteps; //number of time steps aka t so number of price points to be calculated
-    int rfRate; //some rate
-    int volatility; //standard deviation of current option price for norm (average)
-
-    public:
-
-    MCPriceGenerator(int dt_, int initOptionPrice_, int numTimeSteps_, int rfRate_, int volatility_);
-    vector<int> operator() (int seed);
-
-    /*
-    //Constructor with default values
-    //Cannot initialize constructor with default arguments outside class even with using class namespace for some reason
-    MCPriceGenerator(int dt_ = 5, int initOptionPrice_ = 100, int numTimeSteps_ = 2, int rfRate_ = 1, int volatility_ = 1) :
+MCPriceGenerator::MCPriceGenerator(int dt_, int initOptionPrice_, int numTimeSteps_, int rfRate_, int volatility_) :
     dt(dt_), 
     initOptionPrice(initOptionPrice_),
     numTimeSteps(numTimeSteps_),
@@ -36,14 +14,7 @@ class MCPriceGenerator {
     volatility(volatility_)
     {}
 
-    //operator overloading of (), output is vector of option price throughout time steps, and price is type double so vector element type is double
-    //input seed is needed to generate values from engine
-    vector<int> operator() (int seed); 
-    */
-};
-
-/*
-vector<int> MCPriceGenerator::operator()(int seed) {
+vector<int> MCPriceGenerator::operator() (int seed) {
 
     vector<int> optionPrices;
     mt19937_64 engineGenerateVal (seed); //an engine to generate values, numbers generated are dependent on seed
@@ -76,5 +47,3 @@ vector<int> MCPriceGenerator::operator()(int seed) {
     return optionPrices;
 
 }
-*/
-#endif
