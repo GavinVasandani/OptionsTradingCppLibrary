@@ -1,3 +1,4 @@
+#include "MCPriceGenerator.h"
 #include <vector>
 #include <cmath>
 #include <random>
@@ -17,9 +18,9 @@ MCPriceGenerator::MCPriceGenerator(int dt_, int initOptionPrice_, int numTimeSte
 vector<int> MCPriceGenerator::operator() (int seed) {
 
     vector<int> optionPrices;
-    mt19937_64 engineGenerateVal (seed); //an engine to generate values, numbers generated are dependent on seed
+    //mt19937_64 engineGenerateVal (seed); //an engine to generate values, numbers generated are dependent on seed
 
-    normal_distribution <int> nd; //object of class normal_distribution, <> means default class type is used to make class non-templated so object can be made.
+    //normal_distribution <int> nd; //object of class normal_distribution, <> means default class type is used to make class non-templated so object can be made.
     //default is double. also default constructor values used. nd object applies filter on numbers generated to follow normal_dist.
     //normal_distribution has operator overloading () where for a set of double inputs into (), it generates the normal distribution so nd(engineGenerateVal) gives normal_dist of vals generated from engine
 
@@ -39,7 +40,7 @@ vector<int> MCPriceGenerator::operator() (int seed) {
         
         //currentOptPrice is determined by taking previous option price, and
         //using any number from normal dist at randomVal
-        int currentOptPrice = currPrice(optionPrices.back(), nd(engineGenerateVal));
+        int currentOptPrice = currPrice(optionPrices.back(), 1); //nd(engineGenerateVal));
         optionPrices.push_back(currentOptPrice);
 
     }

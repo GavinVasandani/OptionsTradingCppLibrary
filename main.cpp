@@ -12,7 +12,10 @@ int main() {
     int rfRate = 1;
     int vol = 1;
 
+    //Call to constructor in nm
     MCPriceGenerator mcpg (dt, initOptPrice, numTimeSteps, rfRate, vol);
+
+    //Call to operator() func in nm
     vector<int> optPrices = mcpg(1);
 
     for (auto i:optPrices) {
